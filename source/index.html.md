@@ -1,168 +1,99 @@
 ---
-title: API Reference
-
-language_tabs:
-  - shell
-  - ruby
-  - python
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
+title: Intuit Data Protection System 3
 
 search: true
 ---
 
-# Introduction
+# Intuit Data Protection System 3
+> ### Consumes  
+> `application/json`  
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+> ### Produces
+> `application/json`
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
-# Authentication
+## Get appliance status
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+```http
+GET /v3/appliance/status HTTP/1.1
 ```
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    "ca_cert_exists": "boolean",
+    "cloud": "string",
+    "cloud_creds": "boolean",
+    "instance_id": "string",
+    "local_config_exists": "boolean",
+    "master_key_exists": "boolean",
+    "max_api_version": "integer",
+    "min_api_version": "integer",
+    "project_serial": "string",
+    "pvkm_address": "string",
+    "pvkm_address_is_set": "boolean",
+    "pvkm_reachable": "boolean",
+    "region": "string",
+    "time_in_sync": "boolean",
+    "time_skew": "integer",
+    "version": "string",
+    "vkm_credentials_accessible": "boolean"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+### Responses
+<span comment="workaround for markdown processing in table"></span>
+<table>
+<tr><th>Http code</th><th>Type</th><th>Description</th></tr>
+<tr><td>200</td><td>[ApplianceStatus](#appliancestatus)</td><td>Appliance Status</td></tr> 
+</table>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
-### HTTP Request
+# Models
+## ApplianceStatus
+```json
+{
+    "ca_cert_exists": "boolean",
+    "cloud": "string",
+    "cloud_creds": "boolean",
+    "instance_id": "string",
+    "local_config_exists": "boolean",
+    "master_key_exists": "boolean",
+    "max_api_version": "integer",
+    "min_api_version": "integer",
+    "project_serial": "string",
+    "pvkm_address": "string",
+    "pvkm_address_is_set": "boolean",
+    "pvkm_reachable": "boolean",
+    "region": "string",
+    "time_in_sync": "boolean",
+    "time_skew": "integer",
+    "version": "string",
+    "vkm_credentials_accessible": "boolean"
+}
+```
+	
+### Fields
+Name | Type | Description
+--- | --- | ---
+ca_cert_exists | boolean | a CA certificate has been entered into the appliance
+cloud<b title="required">&nbsp;*&nbsp;</b> | string | cloud provider
+cloud_creds | boolean | cloud credentials have been entered for the project
+instance_id<b title="required">&nbsp;*&nbsp;</b> | string | cloud machine instance id
+local_config_exists<b title="required">&nbsp;*&nbsp;</b> | boolean | the appliance has been configured
+master_key_exists<b title="required">&nbsp;*&nbsp;</b> | boolean | the master key has been entered into the appliance
+max_api_version | integer | maximum api version supported by the appliance
+min_api_version | integer | minimum api version supported by the appliance
+project_serial | string | serial identifier of the project this instance belongs to (requires authentication)
+pvkm_address<b title="required">&nbsp;*&nbsp;</b> | string | address of the PVKM that manages this appliance
+pvkm_address_is_set | boolean | the pvkm_address has been set
+pvkm_reachable<b title="required">&nbsp;*&nbsp;</b> | boolean | the appliance is able to connect to the PVKM
+region | string | cloud region
+time_in_sync<b title="required">&nbsp;*&nbsp;</b> | boolean | time on the appliance is in sync with the PVKM
+time_skew | integer | time skew in seconds between the appliance and the PVKM
+version<b title="required">&nbsp;*&nbsp;</b> | string | appliance software version
+vkm_credentials_accessible | boolean | IDPS credentials are accessible at VKM
 
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
+	
