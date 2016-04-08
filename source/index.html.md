@@ -211,9 +211,7 @@ details are returned in the ItemResponse object.
 ### Fields
 Name | Type | Description
 --- | --- | ---
-algorithm | string | The encryption algorithm used in the creation of the item. 
-For item type key, one of: AES128, AES256, RSA1024, RSA2048, AES128ECB, AES256ECB, 
-AES128SIV, or AES256SIV
+algorithm | string | 
 cache_ttl | integer | Items can be configured to be cacheable. 
 The cache time-to-live indicates the time in seconds for which the item can remain cached. 
 A time to live value of 0 prohibits caching.
