@@ -212,8 +212,8 @@ details are returned in the ItemResponse object.
 Name | Type | Description
 --- | --- | ---
 algorithm | string | 
-cache_ttl | integer | Items can be configured to be cacheable. 
-The cache time-to-live indicates the time in seconds for which the item can remain cached. 
+cache_ttl | integer | Items can be configured to be cacheable.
+The cache time-to-live indicates the time in seconds for which the item can remain cached.
 A time to live value of 0 prohibits caching.
 is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such items
 will remain directly accessible through a GET request. A value of true indicates 
