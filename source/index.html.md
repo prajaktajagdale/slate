@@ -182,8 +182,7 @@ contains a list of ItemVersion fields returned as paginated response.
 Name | Type | Description
 --- | --- | ---
 list | array[[ItemVersion](#itemversion)] | Returned list of versions
-next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number.
-The field is omitted for the last page in the response as an indicator that there are no more elements to list.
+next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number.The field is omitted for the last page in the response as an indicator that there are no more elements to list.
 
 	
 ## ItemResponse
