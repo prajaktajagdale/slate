@@ -209,7 +209,7 @@ details are returned in the ItemResponse object.
 ### Fields
 Name | Type | Description
 --- | --- | ---
-algorithm | string | 
+algorithm | string | The encryption algorithm used in the creation of the item. For item type key, one of: AES128, AES256, RSA1024, RSA2048, AES128ECB, AES256ECB, AES128SIV, or AES256SIV
 cache_ttl | integer | Items can be configured to be cacheable. The cache time-to-live indicates the time in seconds for which the item can remain cached. A time to live value of 0 prohibits caching.
 is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such items will remain directly accessible through a GET request. A value of true indicates the item to be listable.
 is_exportable | boolean | When set to true, Indicates that a key&#039;s value can be obtained by GET request. Non-exportable keys are used for remote data encryption/decryption
