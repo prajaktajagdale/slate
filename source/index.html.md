@@ -157,8 +157,7 @@ returned in a paginated form.
 Name | Type | Description
 --- | --- | ---
 list | array[The ItemInList object describes an item that is returned as part of an item list.] | Returned list of items
-next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number.
-The field is omitted for the last page in the response as an indicator that there are no more elements to list.
+next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number. The field is omitted for the last page in the response as an indicator that there are no more elements to list.
 
 	
 ## ItemVersionsListResponse
@@ -211,27 +210,16 @@ details are returned in the ItemResponse object.
 Name | Type | Description
 --- | --- | ---
 algorithm | string | 
-cache_ttl | integer | Items can be configured to be cacheable.
-The cache time-to-live indicates the time in seconds for which the item can remain cached.
-A time to live value of 0 prohibits caching.
-is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such items
-will remain directly accessible through a GET request. A value of true indicates 
-the item to be listable.
-is_exportable | boolean | When set to true, Indicates that a key&#039;s value can be obtained by GET request. 
-Non-exportable keys are used for remote data encryption/decryption
-is_versioned | boolean | IDPS supports versioning of keys to simplify key rotation. An IsVersioned value of true
-indicates that the secret or key can have multiple versions
-item | string | Value of the item, as retrieved from the database. 
-Value of an item of type secret: string. 
-Value of an item of type key: hex-encoded string. 
+cache_ttl | integer | Items can be configured to be cacheable. The cache time-to-live indicates the time in seconds for which the item can remain cached. A time to live value of 0 prohibits caching.
+is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such items will remain directly accessible through a GET request. A value of true indicates the item to be listable.
+is_exportable | boolean | When set to true, Indicates that a key&#039;s value can be obtained by GET request. Non-exportable keys are used for remote data encryption/decryption
+is_versioned | boolean | IDPS supports versioning of keys to simplify key rotation. An IsVersioned value of true indicates that the secret or key can have multiple versions
+item | string | Value of the item, as retrieved from the database. Value of an item of type secret: string. Value of an item of type key: hex-encoded string. 
 last_modified | string | Timestamp of last modification to the item
 metadata | string | User defined metadata as printable string
 name | string | Name of the item, optionally, including its path with &quot;/&quot; separators, e.g., a/b/c
-public_key | string | Indicates the public key For items generated using the RSA asymmetric algorithm. The public
-key is always returned irrespective of the IsEnumerable and IsExportable values. 
+public_key | string | Indicates the public key For items generated using the RSA asymmetric algorithm. The public key is always returned irrespective of the IsEnumerable and IsExportable values. 
 type | string | Type of the returned item, one of: secret, key, or folder
-version | integer | For a versioned item, the field indicates the latest or requested version number. 
-For a non-versioned item, the value will always be 1. 
-min: 1. 
+version | integer | For a versioned item, the field indicates the latest or requested version number. For a non-versioned item, the value will always be 1. min: 1. 
 
 	
