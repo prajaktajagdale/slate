@@ -186,3 +186,55 @@ next | integer | The Next field acts as an index into the paginated response and
 The field is omitted for the last page in the response as an indicator that there are no more elements to list.
 
 	
+## ItemResponse
+```json
+{
+    "algorithm": "string",
+    "cache_ttl": "integer",
+    "is_enumerable": "boolean",
+    "is_exportable": "boolean",
+    "is_versioned": "boolean",
+    "item": "string",
+    "last_modified": "string",
+    "metadata": "string",
+    "name": "string",
+    "public_key": "string",
+    "type": "string",
+    "version": "integer"
+}
+```
+
+The IDPS API allows clients to retrieve details of the stored items including secrets and keys. When requested, these
+details are returned in the ItemResponse object.
+
+	
+### Fields
+Name | Type | Description
+--- | --- | ---
+algorithm | string | The encryption algorithm used in the creation of the item. 
+For item type key, one of: AES128, AES256, RSA1024, RSA2048, AES128ECB, AES256ECB, 
+AES128SIV, or AES256SIV
+cache_ttl | integer | Items can be configured to be cacheable. 
+The cache time-to-live indicates the time in seconds for which the item can remain cached. 
+A time to live value of 0 prohibits caching.
+is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such items
+will remain directly accessible through a GET request. A value of true indicates 
+the item to be listable.
+is_exportable | boolean | When set to true, Indicates that a key&#039;s value can be obtained by GET request. 
+Non-exportable keys are used for remote data encryption/decryption
+is_versioned | boolean | IDPS supports versioning of keys to simplify key rotation. An IsVersioned value of true
+indicates that the secret or key can have multiple versions
+item | string | Value of the item, as retrieved from the database. 
+Value of an item of type secret: string. 
+Value of an item of type key: hex-encoded string. 
+last_modified | string | Timestamp of last modification to the item
+metadata | string | User defined metadata as printable string
+name | string | Name of the item, optionally, including its path with &quot;/&quot; separators, e.g., a/b/c
+public_key | string | Indicates the public key For items generated using the RSA asymmetric algorithm. The public
+key is always returned irrespective of the IsEnumerable and IsExportable values. 
+type | string | Type of the returned item, one of: secret, key, or folder
+version | integer | For a versioned item, the field indicates the latest or requested version number. 
+For a non-versioned item, the value will always be 1. 
+min: 1. 
+
+	
