@@ -850,7 +850,7 @@ version_number | integer | Indicates the version number of the item
 }
 ```
 
-IDPS clients are provided with an ability to retrieve a list of all items. The ItemListResponse object contains such a list of items
+The IDPS API enables clients to retrieve a list of all items. The ItemListResponse object contains such a list of items
 returned in a paginated form.
 
 	
