@@ -806,6 +806,8 @@ vkm_credentials_accessible | boolean | IDPS credentials are accessible at VKM
 }
 ```
 
+Just testing something
+The ItemInList object describes an item that is returned as part of an item list.
 The description includes the name of the item and its type.
 
 	
@@ -836,7 +838,7 @@ returned in a paginated form.
 ### Fields
 Name | Type | Description
 --- | --- | ---
-list | array[The ItemInList object describes an item that is returned as part of an item list.] | Returned list of items
+list | array[[ItemInList](#iteminlist)] | Returned list of items
 next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number. The field is omitted for the last page in the response as an indicator that there are no more elements to list.
 
 	
