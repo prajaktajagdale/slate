@@ -812,29 +812,8 @@ The description includes the name of the item and its type.
 ### Fields
 Name | Type | Description
 --- | --- | ---
-name | string | The name of the item, optionally, including the path with &quot;/&quot; separators, e.g., 
-type | string | Type of the returned item, one of: secret, key, or folder
-
-	
-## ItemVersion
-```json
-{
-    "version_create_date": "string",
-    "version_number": "integer"
-}
-```
-
-IDPS offers clients with an option to version items as a means to simplify key rotation. 
-The ItemVersion field associated with every versioned item indicates a version number and the date of its creation. 
-The IDPS API supports listing of all versions of an item and requesting or deleting a specific version of an item. 
-Operations like encrypt and decrypt can be invoked with an explicit key version. 
-
-	
-### Fields
-Name | Type | Description
---- | --- | ---
-version_create_date | string | Date the version was created
-version_number | integer | Indicates the version number of the item
+name | string | The name of the item, optionally
+type | string | Type of the returned item, one of secret, key, or folder
 
 	
 ## ItemListResponse
@@ -859,6 +838,27 @@ Name | Type | Description
 --- | --- | ---
 list | array[The ItemInList object describes an item that is returned as part of an item list.] | Returned list of items
 next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number. The field is omitted for the last page in the response as an indicator that there are no more elements to list.
+
+	
+## ItemVersion
+```json
+{
+    "version_create_date": "string",
+    "version_number": "integer"
+}
+```
+
+IDPS offers clients with an option to version items as a means to simplify key rotation. 
+The ItemVersion field associated with every versioned item indicates a version number and the date of its creation. 
+The IDPS API supports listing of all versions of an item and requesting or deleting a specific version of an item. 
+Operations like encrypt and decrypt can be invoked with an explicit key version. 
+
+	
+### Fields
+Name | Type | Description
+--- | --- | ---
+version_create_date | string | Date the version was created
+version_number | integer | Indicates the version number of the item
 
 	
 ## ItemVersionsListResponse
