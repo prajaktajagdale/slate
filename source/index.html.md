@@ -317,6 +317,17 @@ GET /v3/items/{name}?op=list HTTP/1.1
 ```
 ```http
 HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "list": [
+        {
+            "name": "string",
+            "type": "string"
+        }
+    ],
+    "next": "integer"
+}
 ```
 ```http
 HTTP/1.1 default 
@@ -337,7 +348,7 @@ start | query | integer | The parameter allows traversal of paginated list respo
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
-<tr><td>200</td><td>no content</td><td></td></tr> 
+<tr><td>200</td><td>[ItemListResponse](#itemlistresponse)</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
