@@ -812,7 +812,7 @@ The description includes the name of the item and its type.
 ### Fields
 Name | Type | Description
 --- | --- | ---
-name | string | The name of the item, optionally, including the path with &quot;/&quot; separators, e.g., a/b/c
+name | string | The name of the item, optionally, including the path with &quot;/&quot; separators, e.g., 
 type | string | Type of the returned item, one of: secret, key, or folder
 
 	
