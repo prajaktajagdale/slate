@@ -13,7 +13,7 @@ search: true
 
 
 
-## Get Open API JSON specification
+## Get open api json specification
 
 ```http
 GET /v3/appliance/open-api-schema HTTP/1.1
@@ -22,11 +22,31 @@ GET /v3/appliance/open-api-schema HTTP/1.1
 HTTP/1.1 200 OK
 Content-Type: application/json
 
-{
-    "object"
-}
+"string"
+```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
 ```
 
+### Responses
+<span comment="workaround for markdown processing in table"></span>
+<table>
+<tr><th>Http code</th><th>Type</th><th>Description</th></tr>
+<tr><td>200</td><td>SwaggerSchema</td><td>Open API JSON Specification</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
+</table>
 
 ## Get random data
 
@@ -41,12 +61,28 @@ Content-Type: application/json
     "random": "string"
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[RandomData](#randomdata)</td><td>Random Data</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Get appliance status
@@ -78,12 +114,28 @@ Content-Type: application/json
     "vkm_credentials_accessible": "boolean"
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[ApplianceStatus](#appliancestatus)</td><td>Appliance status. See https://wiki.intuit.com/display/IISKM/Monitoring+the+IDPS+Agent</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Get appliance time
@@ -99,12 +151,28 @@ Content-Type: application/json
     "time": "integer"
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[ApplianceTime](#appliancetime)</td><td>Appliance Unix Timestamp</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Delete restricted api key
@@ -115,17 +183,33 @@ DELETE /v3/credentials/{apiKey} HTTP/1.1
 ```http
 HTTP/1.1 204 No Content
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
 apiKey<b title="required">&nbsp;*&nbsp;</b> | path | string | 
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>204</td><td>no content</td><td>Restricted API key has been deleted.</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Get temporary credentials
@@ -153,6 +237,18 @@ Content-Type: application/json
     "expiry": "integer"
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 See https://wiki.intuit.com/display/IISKM/API+Authentication+Using+Java
 
@@ -162,12 +258,16 @@ Name | In | Type | Description
 --- | --- | --- | ---
 apiKey<b title="required">&nbsp;*&nbsp;</b> | path | string | 
 Input | body | [GetTempCredsInput](#gettempcredsinput) | 
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[TempCreds](#tempcreds)</td><td>Temporary Credentials</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Generate instance-restricted api key
@@ -193,17 +293,33 @@ Content-Type: application/json
     "api_secret_key": "string"
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
 Input | body | [GetRestrictedKeyInput](#getrestrictedkeyinput) | 
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>201</td><td>[RestrictedApiKey](#restrictedapikey)</td><td>Restricted API Key</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Generate instance-restricted api key by policy
@@ -230,18 +346,34 @@ Content-Type: application/json
     "expires_after": "integer"
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
 policyId<b title="required">&nbsp;*&nbsp;</b> | path | string | api key access policy id
 Input | body | [GetRestrictedKeyByPolicyInput](#getrestrictedkeybypolicyinput) | 
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>201</td><td>[PolicyRestrictedApiKey](#policyrestrictedapikey)</td><td>Restricted API Key</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Delete an item
@@ -262,7 +394,7 @@ Name | In | Type | Description
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 version | query | integer | Version of the item that acts as the input keying material for the HKDF. If not given or version=0, the latest version will be used.
 force | query | boolean | When true, the boolean parameter forces removal of non-empty folders. It, however, will not remove any folder with sub-folders.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
@@ -293,6 +425,18 @@ Content-Type: application/json
 }
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -305,12 +449,16 @@ Name | In | Type | Description
 --- | --- | --- | ---
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 version | query | integer | Version of the item that acts as the input keying material for the HKDF. If not given or version=0, the latest version will be used.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[ItemResponse](#itemresponse)</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -331,6 +479,18 @@ Content-Type: application/json
 "string"
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -345,12 +505,16 @@ legacy_data | query | boolean | This boolean parameter indicates whether the enc
 legacy_version | query | integer | When operating on legacy data (legacy_data=true), the LegacyVersion value indicates the version of the key used to encrypt the data by legacy api version. When omitted, version 1 of the key will be used.
 BinaryBody<b title="required">&nbsp;*&nbsp;</b> | body | string | Data to be operated on. For example it indicates cleartext input for all encrypt operations and ciphertext input for all decrypt operation. The data must be transmitted in a binary encoded format.
 aad | query | string | Additional Authentication Data for deterministic encryption (SIV). Base64 url-safe, comma-separated.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>string</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -361,6 +525,18 @@ POST /v3/items/{name}?op=derive HTTP/1.1
 ```
 ```http
 HTTP/1.1 200 OK
+```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
 ```
 ```http
 HTTP/1.1 default 
@@ -377,19 +553,23 @@ name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, op
 derivation_data<b title="required">&nbsp;*&nbsp;</b> | query | string | The HKDF function used by IDPS to derive key material, allows the resulting key to be bound to a user-defined application- and context-specific information. A client must specify this information by passing a hex-encoded string in the derivation data parameter.
 derived_length<b title="required">&nbsp;*&nbsp;</b> | query | integer | This parameter allows clients to specify the size of the derived data in number of bytes
 version | query | integer | Version of the item that acts as the input keying material for the HKDF. If not given or version=0, the latest version will be used.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>no content</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Derive a key and decrypt data
 
 ```http
-POST /v3/items/{name}?op=derive_and_decrypt HTTP/1.1
+POST /v3/items/{name}?op=derive-and-decrypt HTTP/1.1
 Content-Type: application/json
 
 {
@@ -401,6 +581,18 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 "string"
+```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
 ```
 ```http
 HTTP/1.1 default 
@@ -420,19 +612,23 @@ legacy_data | query | boolean | This boolean parameter indicates whether the enc
 legacy_version | query | integer | When operating on legacy data (legacy_data=true), the LegacyVersion value indicates the version of the key used to encrypt the data by legacy api version. When omitted, version 1 of the key will be used.
 BinaryBody<b title="required">&nbsp;*&nbsp;</b> | body | string | Data to be operated on. For example it indicates cleartext input for all encrypt operations and ciphertext input for all decrypt operation. The data must be transmitted in a binary encoded format.
 aad | query | string | Additional Authentication Data for deterministic encryption (SIV). Base64 url-safe, comma-separated.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>string</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Derive a key and encrypt data
 
 ```http
-POST /v3/items/{name}?op=derive_and_encrypt HTTP/1.1
+POST /v3/items/{name}?op=derive-and-encrypt HTTP/1.1
 Content-Type: application/json
 
 {
@@ -444,6 +640,18 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 "string"
+```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
 ```
 ```http
 HTTP/1.1 default 
@@ -462,12 +670,16 @@ derivation_data<b title="required">&nbsp;*&nbsp;</b> | query | string | The HKDF
 version | query | integer | Version of the item that acts as the input keying material for the HKDF. If not given or version=0, the latest version will be used.
 BinaryBody<b title="required">&nbsp;*&nbsp;</b> | body | string | Data to be operated on. For example it indicates cleartext input for all encrypt operations and ciphertext input for all decrypt operation. The data must be transmitted in a binary encoded format.
 aad | query | string | Additional Authentication Data for deterministic encryption (SIV). Base64 url-safe, comma-separated.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>string</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -486,6 +698,18 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 "string"
+```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
 ```
 ```http
 HTTP/1.1 default 
@@ -507,12 +731,16 @@ name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, op
 version | query | integer | Version of the item that acts as the input keying material for the HKDF. If not given or version=0, the latest version will be used.
 BinaryBody<b title="required">&nbsp;*&nbsp;</b> | body | string | Data to be operated on. For example it indicates cleartext input for all encrypt operations and ciphertext input for all decrypt operation. The data must be transmitted in a binary encoded format.
 aad | query | string | Additional Authentication Data for deterministic encryption (SIV). Base64 url-safe, comma-separated.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>string</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -536,6 +764,18 @@ Content-Type: application/json
 }
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -549,12 +789,16 @@ Name | In | Type | Description
 --- | --- | --- | ---
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 start | query | integer | The parameter allows traversal of paginated list responses. It points to the index of the first page element of a paginated response.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[ItemListResponse](#itemlistresponse)</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -566,6 +810,18 @@ GET /v3/items/{name}?op=list-versions HTTP/1.1
 ```
 ```http
 HTTP/1.1 200 OK
+```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
 ```
 ```http
 HTTP/1.1 default 
@@ -581,12 +837,16 @@ Name | In | Type | Description
 --- | --- | --- | ---
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 start | query | integer | The parameter allows traversal of paginated list responses. It points to the index of the first page element of a paginated response.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>no content</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -607,6 +867,18 @@ Content-Type: application/json
 "string"
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -623,12 +895,16 @@ legacy_data | query | boolean | This boolean parameter indicates whether the enc
 legacy_version | query | integer | When operating on legacy data (legacy_data=true), the LegacyVersion value indicates the version of the key used to encrypt the data by legacy api version. When omitted, version 1 of the key will be used.
 BinaryBody<b title="required">&nbsp;*&nbsp;</b> | body | string | Data to be operated on. For example it indicates cleartext input for all encrypt operations and ciphertext input for all decrypt operation. The data must be transmitted in a binary encoded format.
 aad | query | string | Additional Authentication Data for deterministic encryption (SIV). Base64 url-safe, comma-separated.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>string</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -657,6 +933,21 @@ Content-Type: application/json
 }
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
+HTTP/1.1 409 Conflict
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -671,12 +962,17 @@ The hierarchy allows items with same name to exist within a project as long as t
 Name | In | Type | Description
 --- | --- | --- | ---
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>201</td><td>[ItemResponse](#itemresponse)</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
+<tr><td>409</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -716,6 +1012,21 @@ Content-Type: application/json
 }
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
+HTTP/1.1 409 Conflict
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -733,12 +1044,17 @@ name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, op
 generate_name | query | boolean | A boolean parameter which when set to true will have IDPS generate a random name for the secret or key item
 algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm for which the key is being generated or updated.
 is_exportable | query | boolean | Tag the key to be exportable. For RSA algorithms, the private key will be exported on &#039;true&#039;, while the public key is always returned as a separate parameter.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>201</td><td>[ItemResponse](#itemresponse)</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
+<tr><td>409</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 ## Update an encryption key
@@ -777,6 +1093,18 @@ Content-Type: application/json
 }
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -790,12 +1118,16 @@ Name | In | Type | Description
 body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm for which the key is being generated or updated.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>201</td><td>[ItemResponse](#itemresponse)</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -835,6 +1167,21 @@ Content-Type: application/json
 }
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
+HTTP/1.1 409 Conflict
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -858,12 +1205,17 @@ body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) |
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 size | query | integer | Size of the generated secret in bytes. The returned secret will be a hex-encoded string of length twice the size specified by Size parameter (since 1 byte represents 2 hexadecimal characters)
 generate_name | query | boolean | A boolean parameter which when set to true will have IDPS generate a random name for the secret or key item
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>201</td><td>[ItemResponse](#itemresponse)</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
+<tr><td>409</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 ## Update a secret
@@ -902,6 +1254,18 @@ Content-Type: application/json
 }
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -914,12 +1278,16 @@ Name | In | Type | Description
 body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 size | query | integer | Size of the generated secret in bytes. The returned secret will be a hex-encoded string of length twice the size specified by Size parameter (since 1 byte represents 2 hexadecimal characters)
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>201</td><td>[ItemResponse](#itemresponse)</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -940,6 +1308,18 @@ Content-Type: application/json
 "string"
 ```
 ```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 404 Not Found
+```
+```http
 HTTP/1.1 default 
 ```
 
@@ -951,12 +1331,16 @@ The list of items to be used in the operations and the list of data objects to b
 Name | In | Type | Description
 --- | --- | --- | ---
 BinaryBody<b title="required">&nbsp;*&nbsp;</b> | body | string | Data to be operated on. For example it indicates cleartext input for all encrypt operations and ciphertext input for all decrypt operation. The data must be transmitted in a binary encoded format.
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>string</td><td></td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>404</td><td>no content</td><td></td></tr> 
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
@@ -973,12 +1357,28 @@ Content-Type: application/json
     "ca-cert": "string"
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[CaCertificate](#cacertificate)</td><td>Project CA Certificate</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Get list of projects for the user
@@ -1002,12 +1402,28 @@ Content-Type: application/json
     ]
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[ProjectList](#projectlist)</td><td>User Projects</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 ## Get list of appliances for the project
@@ -1032,17 +1448,33 @@ Content-Type: application/json
     ]
 }
 ```
+```http
+HTTP/1.1 400 Bad Request
+```
+```http
+HTTP/1.1 401 Unauthorized
+```
+```http
+HTTP/1.1 403 Forbidden
+```
+```http
+HTTP/1.1 default 
+```
 
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
 projectSerial<b title="required">&nbsp;*&nbsp;</b> | path | string | 
-
+//todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
 <tr><td>200</td><td>[ApplianceList](#appliancelist)</td><td>Project Appliances</td></tr> 
+<tr><td>400</td><td>no content</td><td></td></tr> 
+<tr><td>401</td><td>no content</td><td></td></tr> 
+<tr><td>403</td><td>no content</td><td></td></tr> 
+<tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
 
@@ -1174,6 +1606,24 @@ ca-cert<b title="required">&nbsp;*&nbsp;</b> | string | Project CA certificate i
 Name | Type | Description
 --- | --- | ---
 item | string | A hex-encoded representation of the derived data.
+
+	
+## ErrorResponse
+```json
+{
+    "error": "string",
+    "message": "string"
+}
+```
+
+Response containing error description
+
+	
+### Fields
+Name | Type | Description
+--- | --- | ---
+error | string | Internal error code
+message | string | Error message
 
 	
 ## GetRestrictedKeyByPolicyInput
