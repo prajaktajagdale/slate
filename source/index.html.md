@@ -139,7 +139,7 @@ Content-Type: application/json
 HTTP/1.1 default 
 ```
 
-Decrypt data using the specified key
+Use this call for remote decryption by specifying the stored key in the url and the data to decrypt in the request body. The request body contains binary-encoded ciphertext including the 6-byte header with the version information. The header must be excluded when the legacy_data query parameter is set to true. 
 
 
 ### Parameters
@@ -291,7 +291,13 @@ Content-Type: application/json
 HTTP/1.1 default 
 ```
 
-Encrypt data using the specified key
+Clients using IDPS to manage encryption keys can choose to perform the encryption and decryption operations either
+locally (i.e. on the client system) or remotely (i.e. on the IDPS appliance). 
+Use this call to perform remote encryption. The IDPS appliance will use the algorithm and key indicated by the item
+passed in the url to encrypt the cleartext included in the request body. The returned binary response contains the
+encrypted data along with the header containing metadata.
+IDPS supports symmetric, assymetric and deterministic encryption algorithms - AES128, AES256, RSA1024, RSA2048, 
+AES128ECB, AES256ECB, AES128SIV, or AES256SIV.
 
 
 ### Parameters
@@ -404,7 +410,8 @@ Content-Type: application/json
 HTTP/1.1 default 
 ```
 
-Reencrypt data using the specified key and parameters.
+Any update to a key is followed by re-encryption of the data encrypted using the updated key. This call helps clients to seamlessly perform this operation by passing the name of the updated key and other parameters in the url. 
+Alternatively, the call can be used any time the client wishes to encrypt data using a version of the key different from the one previously used for encryption.
 Always use latest version of the key to encrypt.
 
 
@@ -523,7 +530,7 @@ Name | In | Type | Description
 body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 generate_name | query | boolean | A boolean parameter which when set to true will have IDPS generate a random name for the secret or key item
-algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm that will consume the key being generated or updated.
+algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm for which the key is being generated or updated.
 is_exportable | query | boolean | Tag the key to be exportable. For RSA algorithms, the private key will be exported on &#039;true&#039;, while the public key is always returned as a separate parameter.
 //todo: migrate to html tables. after cool looking nested table
 ### Responses
@@ -581,7 +588,7 @@ Name | In | Type | Description
 --- | --- | --- | ---
 body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
-algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm that will consume the key being generated or updated.
+algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm for which the key is being generated or updated.
 //todo: migrate to html tables. after cool looking nested table
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
@@ -806,40 +813,14 @@ vkm_credentials_accessible | boolean | IDPS credentials are accessible at VKM
 }
 ```
 
-Just testing something
-The ItemInList object describes an item that is returned as part of an item list.
 The description includes the name of the item and its type.
 
 	
 ### Fields
 Name | Type | Description
 --- | --- | ---
-name | string | The name of the item, optionally
-type | string | Type of the returned item, one of secret, key, or folder
-
-	
-## ItemListResponse
-```json
-{
-    "list": [
-        {
-            "name": "string",
-            "type": "string"
-        }
-    ],
-    "next": "integer"
-}
-```
-
-The IDPS API enables clients to retrieve a list of all items. The ItemListResponse object contains such a list of items
-returned in a paginated form.
-
-	
-### Fields
-Name | Type | Description
---- | --- | ---
-list | array[[ItemInList](#iteminlist)] | Returned list of items
-next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number. The field is omitted for the last page in the response as an indicator that there are no more elements to list.
+name | string | The name of the item, optionally, including the path with &quot;/&quot; separators, e.g., a/b/c
+type | string | Type of the returned item, one of: secret, key, or folder
 
 	
 ## ItemVersion
@@ -861,6 +842,30 @@ Name | Type | Description
 --- | --- | ---
 version_create_date | string | Date the version was created
 version_number | integer | Indicates the version number of the item
+
+	
+## ItemListResponse
+```json
+{
+    "list": [
+        {
+            "name": "string",
+            "type": "string"
+        }
+    ],
+    "next": "integer"
+}
+```
+
+IDPS clients are provided with an ability to retrieve a list of all items. The ItemListResponse object contains such a list of items
+returned in a paginated form.
+
+	
+### Fields
+Name | Type | Description
+--- | --- | ---
+list | array[The ItemInList object describes an item that is returned as part of an item list.] | Returned list of items
+next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number. The field is omitted for the last page in the response as an indicator that there are no more elements to list.
 
 	
 ## ItemVersionsListResponse
