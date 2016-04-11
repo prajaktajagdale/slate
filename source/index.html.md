@@ -722,6 +722,7 @@ passed in the url to encrypt the cleartext included in the request body. The ret
 encrypted data along with the header containing metadata.
 IDPS supports symmetric, assymetric and deterministic encryption algorithms - AES128, AES256, RSA1024, RSA2048, 
 AES128ECB, AES256ECB, AES128SIV, or AES256SIV.
+The returned binary response contains the encrypted data. A 6 byte prefix is attached to the encrypted data. The prefix includes a 2-byte fixed header containing the magic byte and the API version. The remaining 4 bytes indicate the key version.
 
 
 ### Parameters
