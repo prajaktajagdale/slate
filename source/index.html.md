@@ -48,43 +48,6 @@ HTTP/1.1 default
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
-## Using this api, client applications can obtain 256 bytes of random material from idps. the returned random data is of suitable strength for use in cryptographic operations.
-
-```http
-GET /v3/appliance/random HTTP/1.1
-```
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-    "random": "string"
-}
-```
-```http
-HTTP/1.1 400 Bad Request
-```
-```http
-HTTP/1.1 401 Unauthorized
-```
-```http
-HTTP/1.1 403 Forbidden
-```
-```http
-HTTP/1.1 default 
-```
-
-### Responses
-<span comment="workaround for markdown processing in table"></span>
-<table>
-<tr><th>Http code</th><th>Type</th><th>Description</th></tr>
-<tr><td>200</td><td>[RandomData](#randomdata)</td><td>Random Data</td></tr> 
-<tr><td>400</td><td>no content</td><td></td></tr> 
-<tr><td>401</td><td>no content</td><td></td></tr> 
-<tr><td>403</td><td>no content</td><td></td></tr> 
-<tr><td>default</td><td>no content</td><td></td></tr> 
-</table>
-
 ## Get appliance status
 
 ```http
@@ -1909,22 +1872,6 @@ vpc_id | string | VPC id of the project&#039;s appliances, if specified
 Name | Type | Description
 --- | --- | ---
 projects<b title="required">&nbsp;*&nbsp;</b> | array[[ProjectDescription](#projectdescription)] | 
-
-	
-## RandomData
-```json
-{
-    "random": "string"
-}
-```
-
-Random Data
-
-	
-### Fields
-Name | Type | Description
---- | --- | ---
-random<b title="required">&nbsp;*&nbsp;</b> | string | Represents 256 bytes of randomly generated data, encoded as a base64 string. The returned string will be 344 characters long.
 
 	
 ## RestrictedApiKey
