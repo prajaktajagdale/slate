@@ -48,7 +48,7 @@ HTTP/1.1 default
 <tr><td>default</td><td>no content</td><td></td></tr> 
 </table>
 
-## Get random data
+## Using this api, client applications can obtain 256 bytes of random material from idps. the returned random data is of suitable strength for use in cryptographic operations.
 
 ```http
 GET /v3/appliance/random HTTP/1.1
@@ -98,6 +98,7 @@ Content-Type: application/json
     "ca_cert_exists": "boolean",
     "cloud": "string",
     "cloud_creds": "boolean",
+    "go_server_accessible": "boolean",
     "instance_id": "string",
     "local_config_exists": "boolean",
     "master_key_exists": "boolean",
@@ -384,7 +385,7 @@ DELETE /v3/items/{name} HTTP/1.1
 
 Use the call to delete items of any type from the database.
 In the absence of the version parameter, all versions of a secret or key are deleted.
-By default, folders are only deleted if empty. 
+By default, folders are only deleted if empty.
 If the force parameter is set to true, a folder is deleted with any contained items, provided it does not contain sub-folders.
 
 
@@ -417,6 +418,7 @@ Content-Type: application/json
     "is_versioned": "boolean",
     "item": "string",
     "last_modified": "string",
+    "latest_version": "integer",
     "metadata": "string",
     "name": "string",
     "public_key": "string",
@@ -494,7 +496,7 @@ HTTP/1.1 404 Not Found
 HTTP/1.1 default 
 ```
 
-Use this call for remote decryption by specifying the stored key in the url and the data to decrypt in the request body. The request body contains binary-encoded ciphertext including the 6-byte header with the version information. The header must be excluded when the legacy_data query parameter is set to true. 
+Use this call for remote decryption by specifying the stored key in the url and the data to decrypt in the request body. The request body contains binary-encoded ciphertext including the 6-byte header with the version information. The header must be excluded when the legacy_data query parameter is set to true.
 
 
 ### Parameters
@@ -542,7 +544,7 @@ HTTP/1.1 404 Not Found
 HTTP/1.1 default 
 ```
 
-Key derivation offers an effective strategy when dealing with large number of data objects to be protected. It is used to establish a hierarchy of keys. Use this call to specify the root key and some ancillary information, usually characterizing the client application or an object to be encrypted. IDPS, upon feeding this information to an HMAC-based Key Derivation Function (HKDF) will, deterministically produce a derived key unique to the application or object. 
+Key derivation offers an effective strategy when dealing with large number of data objects to be protected. It is used to establish a hierarchy of keys. Use this call to specify the root key and some ancillary information, usually characterizing the client application or an object to be encrypted. IDPS, upon feeding this information to an HMAC-based Key Derivation Function (HKDF) will, deterministically produce a derived key unique to the application or object.
 IDPS will continue to manage the root key, however, the derived key will be generated each time it is needed hence eliminating the need for its storage and management. This enables the IDPS clients to scale to very large number of keys while keeping latency and storage requirements low.
 
 
@@ -599,7 +601,7 @@ HTTP/1.1 default
 ```
 
 Derive an encryption key from the specified key and use it for decryption.
-Key derivation offers an effective strategy when dealing with large number of data objects to be protected. It is used to establish a hierarchy of keys. Use this call to specify the root key and some ancillary information, usually characterizing the client application or an object to be encrypted. IDPS, upon feeding this information to an HMAC-based Key Derivation Function (HKDF) will, deterministically produce a derived key unique to the application or object. 
+Key derivation offers an effective strategy when dealing with large number of data objects to be protected. It is used to establish a hierarchy of keys. Use this call to specify the root key and some ancillary information, usually characterizing the client application or an object to be encrypted. IDPS, upon feeding this information to an HMAC-based Key Derivation Function (HKDF) will, deterministically produce a derived key unique to the application or object.
 IDPS will continue to manage the root key, however, the derived key will be generated each time it is needed hence eliminating the need for its storage and management. This enables the IDPS clients to scale to very large number of keys while keeping latency and storage requirements low.
 
 
@@ -658,7 +660,7 @@ HTTP/1.1 default
 ```
 
 Derive an encryption key from the specified key and use it for encryption.
-Key derivation offers an effective strategy when dealing with large number of data objects to be protected. It is used to establish a hierarchy of keys. Use this call to specify the root key and some ancillary information, usually characterizing the client application or an object to be encrypted. IDPS, upon feeding this information to an HMAC-based Key Derivation Function (HKDF) will, deterministically produce a derived key unique to the application or object. 
+Key derivation offers an effective strategy when dealing with large number of data objects to be protected. It is used to establish a hierarchy of keys. Use this call to specify the root key and some ancillary information, usually characterizing the client application or an object to be encrypted. IDPS, upon feeding this information to an HMAC-based Key Derivation Function (HKDF) will, deterministically produce a derived key unique to the application or object.
 IDPS will continue to manage the root key, however, the derived key will be generated each time it is needed hence eliminating the need for its storage and management. This enables the IDPS clients to scale to very large number of keys while keeping latency and storage requirements low.
 
 
@@ -716,11 +718,11 @@ HTTP/1.1 default
 ```
 
 Clients using IDPS to manage encryption keys can choose to perform the encryption and decryption operations either
-locally (i.e. on the client system) or remotely (i.e. on the IDPS appliance). 
+locally (i.e. on the client system) or remotely (i.e. on the IDPS appliance).
 Use this call to perform remote encryption. The IDPS appliance will use the algorithm and key indicated by the item
 passed in the url to encrypt the cleartext included in the request body. The returned binary response contains the
 encrypted data along with the header containing metadata.
-IDPS supports symmetric, assymetric and deterministic encryption algorithms - AES128, AES256, RSA1024, RSA2048, 
+IDPS supports symmetric, assymetric and deterministic encryption algorithms - AES128, AES256, RSA1024, RSA2048,
 AES128ECB, AES256ECB, AES128SIV, or AES256SIV.
 The returned binary response contains the encrypted data. A 6 byte prefix is attached to the encrypted data. The prefix includes a 2-byte fixed header containing the magic byte and the API version. The remaining 4 bytes indicate the key version.
 
@@ -883,7 +885,7 @@ HTTP/1.1 404 Not Found
 HTTP/1.1 default 
 ```
 
-Any update to a key is followed by re-encryption of the data encrypted using the updated key. This call helps clients to seamlessly perform this operation by passing the name of the updated key and other parameters in the url. 
+Any update to a key is followed by re-encryption of the data encrypted using the updated key. This call helps clients to seamlessly perform this operation by passing the name of the updated key and other parameters in the url.
 Alternatively, the call can be used any time the client wishes to encrypt data using a version of the key different from the one previously used for encryption. The key version to use is specified either in the header of the ciphertext or using the legacy_version parameter when legacy_data=true.
 Always use latest version of the key to encrypt.
 
@@ -926,6 +928,7 @@ Content-Type: application/json
     "is_versioned": "boolean",
     "item": "string",
     "last_modified": "string",
+    "latest_version": "integer",
     "metadata": "string",
     "name": "string",
     "public_key": "string",
@@ -952,10 +955,10 @@ HTTP/1.1 409 Conflict
 HTTP/1.1 default 
 ```
 
-IDPS supports a hierarchical namespace for organizing stored items. Thus clients can group 
-and scope items using a hierarchical folder structure. IDPS treats a folder as a type of item. 
-So the item name &#039;A/B/C&#039; represents an item or folder &#039;C&#039; residing in folder &#039;B&#039; under folder &#039;A&#039;. 
-It is important to note that to create item &#039;C&#039;, folder &#039;A/B&#039; should already exist. 
+IDPS supports a hierarchical namespace for organizing stored items. Thus clients can group
+and scope items using a hierarchical folder structure. IDPS treats a folder as a type of item.
+So the item name &#039;A/B/C&#039; represents an item or folder &#039;C&#039; residing in folder &#039;B&#039; under folder &#039;A&#039;.
+It is important to note that to create item &#039;C&#039;, folder &#039;A/B&#039; should already exist.
 The hierarchy allows items with same name to exist within a project as long as they reside in different folders.
 
 
@@ -1005,6 +1008,7 @@ Content-Type: application/json
     "is_versioned": "boolean",
     "item": "string",
     "last_modified": "string",
+    "latest_version": "integer",
     "metadata": "string",
     "name": "string",
     "public_key": "string",
@@ -1040,7 +1044,7 @@ Similarly, clients can instruct IDPS to generate a random name for the key being
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
-body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
+body<b title="required">&nbsp;*&nbsp;</b> | body | The ItemRequest object represents all the configurable parameters that can be specified by a client during generation of a new item or storage of an existing item. | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 generate_name | query | boolean | A boolean parameter which when set to true will have IDPS generate a random name for the secret or key item
 algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm for which the key is being generated or updated.
@@ -1086,6 +1090,7 @@ Content-Type: application/json
     "is_versioned": "boolean",
     "item": "string",
     "last_modified": "string",
+    "latest_version": "integer",
     "metadata": "string",
     "name": "string",
     "public_key": "string",
@@ -1110,14 +1115,18 @@ HTTP/1.1 default
 ```
 
 It is recommended that keys have limited lifespans and are rotated periodically to minimize risk. Clients may also need to generate newer versions of keys in case of suspected compromise or as part of disaster recovery strategies. The update call allows a key with the specified name and parameters to be updated to a newer version.
-The key can be randomly generated by omitting the item in the body.
+The key can be randomly generated by omitting the item in the body and providing generate_value=true parameter
+Note that key value is always updated; it is not possible to just change metadata.
+Note that for unversioned keys, previous key value will be overwritten and the existing encrypted data
+will become inaccessible.
 
 
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
-body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
+body<b title="required">&nbsp;*&nbsp;</b> | body | The ItemRequest object represents all the configurable parameters that can be specified by a client during generation of a new item or storage of an existing item. | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
+generate_value | query | boolean | Randomly generate the secret or key value (true/false)
 algorithm<b title="required">&nbsp;*&nbsp;</b> | query | string | Encryption algorithm for which the key is being generated or updated.
 //todo: migrate to html tables. after cool looking nested table
 ### Responses
@@ -1160,6 +1169,7 @@ Content-Type: application/json
     "is_versioned": "boolean",
     "item": "string",
     "last_modified": "string",
+    "latest_version": "integer",
     "metadata": "string",
     "name": "string",
     "public_key": "string",
@@ -1187,22 +1197,22 @@ HTTP/1.1 default
 ```
 
 Create a secret with the specified name and parameters.
-Secrets are opaque data objects that IDPS manages. Examples of secrets include database passwords, TLS certificates, 
-API keys (such as a Services Gateway PrivateAuth key), or even encryption keys that that an application or a 
-third-party has generated. Although the last example of a kind of secret is encryption keys, it must not be confused 
-with the IDPS item type of &#039;key&#039; - the distinction being that IDPS did not generate the encryption key and will simply 
+Secrets are opaque data objects that IDPS manages. Examples of secrets include database passwords, TLS certificates,
+API keys (such as a Services Gateway PrivateAuth key), or even encryption keys that that an application or a
+third-party has generated. Although the last example of a kind of secret is encryption keys, it must not be confused
+with the IDPS item type of &#039;key&#039; - the distinction being that IDPS did not generate the encryption key and will simply
 treat it as an arbitrary string of bytes that needs to be securely stored and managed.
-Clients can also use this call to generate a random secret, which, the application can then use as an keying material 
-for cryptographic algorithms not supported by IDPS. Such a secret can be generated by passing an empty string in the 
+Clients can also use this call to generate a random secret, which, the application can then use as an keying material
+for cryptographic algorithms not supported by IDPS. Such a secret can be generated by passing an empty string in the
 &#039;item&#039; field of the ItemRequest parameter object.
-Additionally, by setting the generate_name parameter to true, the client can instruct IDPS to generate a random name 
+Additionally, by setting the generate_name parameter to true, the client can instruct IDPS to generate a random name
 for the secret. The &#039;name&#039; in the url, in this case, must be set to the parent folder.
 
 
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
-body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
+body<b title="required">&nbsp;*&nbsp;</b> | body | The ItemRequest object represents all the configurable parameters that can be specified by a client during generation of a new item or storage of an existing item. | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 size | query | integer | Size of the generated secret in bytes. The returned secret will be a hex-encoded string of length twice the size specified by Size parameter (since 1 byte represents 2 hexadecimal characters)
 generate_name | query | boolean | A boolean parameter which when set to true will have IDPS generate a random name for the secret or key item
@@ -1247,6 +1257,7 @@ Content-Type: application/json
     "is_versioned": "boolean",
     "item": "string",
     "last_modified": "string",
+    "latest_version": "integer",
     "metadata": "string",
     "name": "string",
     "public_key": "string",
@@ -1271,12 +1282,13 @@ HTTP/1.1 default
 ```
 
 Update a secret with the specified name and parameters
+Note that secret value is always updated; it is not possible to just change metadata
 
 
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
-body<b title="required">&nbsp;*&nbsp;</b> | body | [ItemRequest](#itemrequest) | Item data for create and update operations
+body<b title="required">&nbsp;*&nbsp;</b> | body | The ItemRequest object represents all the configurable parameters that can be specified by a client during generation of a new item or storage of an existing item. | Item data for create and update operations
 name<b title="required">&nbsp;*&nbsp;</b> | path | string | Name of the item, optionally including the path with &quot;/&quot; separators, e.g., a/b/c
 size | query | integer | Size of the generated secret in bytes. The returned secret will be a hex-encoded string of length twice the size specified by Size parameter (since 1 byte represents 2 hexadecimal characters)
 //todo: migrate to html tables. after cool looking nested table
@@ -1531,6 +1543,7 @@ instances<b title="required">&nbsp;*&nbsp;</b> | array[[ApplianceDescription](#a
     "ca_cert_exists": "boolean",
     "cloud": "string",
     "cloud_creds": "boolean",
+    "go_server_accessible": "boolean",
     "instance_id": "string",
     "local_config_exists": "boolean",
     "master_key_exists": "boolean",
@@ -1554,6 +1567,7 @@ Name | Type | Description
 ca_cert_exists | boolean | a CA certificate has been entered into the appliance
 cloud<b title="required">&nbsp;*&nbsp;</b> | string | cloud provider
 cloud_creds | boolean | cloud credentials have been entered for the project
+go_server_accessible | boolean | Go server is accessible
 instance_id<b title="required">&nbsp;*&nbsp;</b> | string | cloud machine instance id
 local_config_exists<b title="required">&nbsp;*&nbsp;</b> | boolean | the appliance has been configured
 master_key_exists<b title="required">&nbsp;*&nbsp;</b> | boolean | the master key has been entered into the appliance
@@ -1690,7 +1704,6 @@ time<b title="required">&nbsp;*&nbsp;</b> | integer | appliance Unix timestamp
 }
 ```
 
-Returned in response to a list item operation. 
 The ItemInList object describes an item that is returned as part of an item list.
 The description includes the name of the item and its type.
 
@@ -1722,7 +1735,7 @@ returned in a paginated form.
 ### Fields
 Name | Type | Description
 --- | --- | ---
-list | array[[ItemInList](#iteminlist)] | Returned list of items
+list | array[Returned in response to a list item operation.] | Returned list of items
 next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number. The field is omitted for the last page in the response as an indicator that there are no more elements to list.
 
 	
@@ -1737,10 +1750,9 @@ next | integer | The Next field acts as an index into the paginated response and
 }
 ```
 
-The ItemRequest object represents all the configurable parameters that can be specified by a client during generation of a new item or storage of an existing item. 
-Through ItemRequest, a client can dictate if an item can be cached or whether it&#039;s hidden. 
-Clients can also indicate whether mulitple versions of the item need to be managed by IDPS, a feature directed at simplifying key rotation. In addition to storage and 
-retrieval of specific versions, IDPS also provides the ability to invoke operations like encrypt and decrypt with specific versions of an item. 
+Through ItemRequest, a client can dictate if an item can be cached or whether it&#039;s hidden.
+Clients can also indicate whether mulitple versions of the item need to be managed by IDPS, a feature directed at simplifying key rotation. In addition to storage and
+retrieval of specific versions, IDPS also provides the ability to invoke operations like encrypt and decrypt with specific versions of an item.
 For items derived from a versioned item, changes to the version are propagated transparently to the derived items upon their subsequent retrieval.
 Clients also have the option of attaching metadata with each item and its versions.
 
@@ -1748,9 +1760,9 @@ Clients also have the option of attaching metadata with each item and its versio
 ### Fields
 Name | Type | Description
 --- | --- | ---
-cache_ttl | integer | Cache time-to-live in seconds for which the item can be cached by the VA. Caching can be disabled by specifying CacheTtl=0. 
+cache_ttl | integer | Cache time-to-live in seconds for which the item can be cached by the VA. Caching can be disabled by specifying CacheTtl=0.
 is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such an item continues to remain directly accessible through a GET request. To make an item in a list visible, set IsEnumerable to true.
-is_versioned | boolean | IDPS supports versioning of items as a means to simplify key rotation. An IsVersioned value of true results in a new version of the item being created for each update to the item. 
+is_versioned | boolean | IDPS supports versioning of items as a means to simplify key rotation. An IsVersioned value of true results in a new version of the item being created for each update to the item.
 item | string | Item to store in the IDPS. For item type of secret, the value is a string. For item type of key, the value is a hex-encoded string.
 metadata<b title="required">&nbsp;*&nbsp;</b> | string | User-supplied metadata string
 
@@ -1765,6 +1777,7 @@ metadata<b title="required">&nbsp;*&nbsp;</b> | string | User-supplied metadata 
     "is_versioned": "boolean",
     "item": "string",
     "last_modified": "string",
+    "latest_version": "integer",
     "metadata": "string",
     "name": "string",
     "public_key": "string",
@@ -1782,16 +1795,17 @@ Name | Type | Description
 --- | --- | ---
 algorithm | string | The encryption algorithm used in the creation of the item. For item type key, one of: AES128, AES256, RSA1024, RSA2048, AES128ECB, AES256ECB, AES128SIV, or AES256SIV
 cache_ttl | integer | Items can be configured to be cacheable. The cache time-to-live indicates the time in seconds for which the item can remain cached. A time to live value of 0 prohibits caching.
-is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such an item continues to remain directly accessible through a GET request. A value of true makes the item visible in a list. 
+is_enumerable | boolean | An IsEnumerable value of false prevents an item from appearing in item list. Such an item continues to remain directly accessible through a GET request. A value of true makes the item visible in a list.
 is_exportable | boolean | When set to true, Indicates that a key&#039;s value can be obtained by GET request. Non-exportable keys are used for remote data encryption/decryption
 is_versioned | boolean | IDPS supports versioning of items to simplify key rotation. An IsVersioned value of true indicates that the secret or key can have multiple versions
-item | string | Value of the item, as retrieved from the database. Value of an item of type secret: string. Value of an item of type key: hex-encoded string. 
+item | string | Value of the item, as retrieved from the database. Value of an item of type secret: string. Value of an item of type key: hex-encoded string.
 last_modified | string | Timestamp of last modification to the item
+latest_version | integer | The latest version number of the secret or key
 metadata | string | User defined metadata as printable string
 name | string | Name of the item, optionally, including its path with &quot;/&quot; separators, e.g., a/b/c
-public_key | string | Indicates the public key For items generated using the RSA asymmetric algorithm. The public key is always returned irrespective of the IsEnumerable and IsExportable values. 
+public_key | string | Indicates the public key For items generated using the RSA asymmetric algorithm. The public key is always returned irrespective of the IsEnumerable and IsExportable values.
 type | string | Type of the returned item, one of: secret, key, or folder
-version | integer | For a versioned item, the field indicates the latest or requested version number. For a non-versioned item, the value will always be 1. min: 1. 
+version | integer | For a versioned item, the field indicates the latest or requested version number. For a non-versioned item, the value will always be 1. min: 1.
 
 	
 ## ItemVersion
@@ -1802,10 +1816,9 @@ version | integer | For a versioned item, the field indicates the latest or requ
 }
 ```
 
-IDPS offers clients with an option to version items as a means to simplify key rotation. 
-The ItemVersion field associated with every versioned item indicates a version number and the date of its creation. 
-The IDPS API supports listing of all versions of an item and requesting or deleting a specific version of an item. 
-Operations like encrypt and decrypt can be invoked with an explicit key version. 
+The ItemVersion field associated with every versioned item indicates a version number and the date of its creation.
+The IDPS API supports listing of all versions of an item and requesting or deleting a specific version of an item.
+Operations like encrypt and decrypt can be invoked with an explicit key version.
 
 	
 ### Fields
@@ -1828,14 +1841,14 @@ version_number | integer | Indicates the version number of the item
 }
 ```
 
-The IDPS API offers clients the ability to list all available versions for a versioned key. The ItemVersionListResponse object 
-contains a list of ItemVersion fields returned as paginated response. 
+The IDPS API offers clients the ability to list all available versions for a versioned key. The ItemVersionListResponse object
+contains a list of ItemVersion fields returned as paginated response.
 
 	
 ### Fields
 Name | Type | Description
 --- | --- | ---
-list | array[[ItemVersion](#itemversion)] | Returned list of versions
+list | array[IDPS offers clients with an option to version items as a means to simplify key rotation.] | Returned list of versions
 next | integer | The Next field acts as an index into the paginated response and is an indicator of the current page number.The field is omitted for the last page in the response as an indicator that there are no more elements to list.
 
 	
@@ -1911,7 +1924,7 @@ Random Data
 ### Fields
 Name | Type | Description
 --- | --- | ---
-random<b title="required">&nbsp;*&nbsp;</b> | string | Returns exactly 256 random bytes, suitable for use in cryptographic operations. The bytes are returned encoded to a base64 string
+random<b title="required">&nbsp;*&nbsp;</b> | string | Represents 256 bytes of randomly generated data, encoded as a base64 string. The returned string will be 344 characters long.
 
 	
 ## RestrictedApiKey
