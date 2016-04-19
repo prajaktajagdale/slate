@@ -131,14 +131,14 @@ HTTP/1.1 403 Forbidden
 HTTP/1.1 default 
 ```
 
-Use this call to query current status and configuration of the virtual appliance.
+Use this call to query the current status and configuration properties of the virtual appliance.
 
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
-<tr><td>200</td><td>[ApplianceStatus](#appliancestatus)</td><td>Appliance status. See https://wiki.intuit.com/display/IISKM/Monitoring+the+IDPS+Agent</td></tr> 
+<tr><td>200</td><td>[ApplianceStatus](#appliancestatus)</td><td>Appliance status</td></tr> 
 <tr><td>400</td><td>no content</td><td></td></tr> 
 <tr><td>401</td><td>no content</td><td></td></tr> 
 <tr><td>403</td><td>no content</td><td></td></tr> 
@@ -170,6 +170,9 @@ HTTP/1.1 403 Forbidden
 ```http
 HTTP/1.1 default 
 ```
+
+With this call, the appliance will return the time in seconds since the Epoch (00:00:00 UTC, January 1, 1970). Time synchronization between a client and VA is a crucial for the API authentication protocols used by IDPS. Success of the authentication protocol depends on the client being in sync with the VA. Using this call, clients can verify whether its system time is synchronized with the time reported by the VA.
+
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
