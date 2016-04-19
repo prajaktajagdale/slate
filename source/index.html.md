@@ -131,6 +131,9 @@ HTTP/1.1 403 Forbidden
 HTTP/1.1 default 
 ```
 
+Use this call to query current status and configuration of the virtual appliance.
+
+
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
@@ -1385,6 +1388,9 @@ HTTP/1.1 403 Forbidden
 ```http
 HTTP/1.1 default 
 ```
+
+Use this call to obtain a certificate from the project&#039;s Certificate Authority (CA). The certificate will be bound to the VA and will allow the client to enter into an explicity trust relationship with the project-specific CA.
+
 
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
