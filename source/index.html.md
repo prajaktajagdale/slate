@@ -37,6 +37,9 @@ HTTP/1.1 403 Forbidden
 HTTP/1.1 default 
 ```
 
+This call will describe the IDPS RESTful API using the OpenAPI specification. The returned schema acts as a language-agnostic interface to the API and is meant to outline the capabilities and features exposed by the API. For further information on the OpenAPI specification please visit https://github.com/OAI/OpenAPI-Specification/blob/master/README.md.
+
+
 ### Responses
 <span comment="workaround for markdown processing in table"></span>
 <table>
