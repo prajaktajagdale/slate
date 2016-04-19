@@ -206,6 +206,9 @@ HTTP/1.1 403 Forbidden
 HTTP/1.1 default 
 ```
 
+Use this call to delete a restricted API key specified by the key ID path parameter.
+
+
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
@@ -260,7 +263,7 @@ HTTP/1.1 403 Forbidden
 HTTP/1.1 default 
 ```
 
-See https://wiki.intuit.com/display/IISKM/API+Authentication+Using+Java
+Use this call to obtain temporary, time-limited credentials that will be used to authenticate subsequent API calls. The request will be protected against replay attacks using the random nonce and a time value. The caller proves possession of a valid API key by using it to sign a message string as explained in detail at https://wiki.intuit.com/display/IISKM/API+Authentication+Using+Java
 
 
 ### Parameters
@@ -315,6 +318,9 @@ HTTP/1.1 403 Forbidden
 ```http
 HTTP/1.1 default 
 ```
+
+IDPS allows creation of API keys bound to specific instance IDs. When a restricted key is used for API access, IDPS will verify that the instance from which the call originates is the one authorized to use the key. Clients can use this call to request an instance-restricted and time limited API key
+
 
 ### Parameters
 Name | In | Type | Description
