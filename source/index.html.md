@@ -375,6 +375,9 @@ HTTP/1.1 403 Forbidden
 HTTP/1.1 default 
 ```
 
+To relieve the burden of having to secure API keys, IDPS offers a mechanism for policy driven API authentication. After defining the access policy in the management console, a client can request an API key bound to the policy using this call. The verification against the policy is peformed using either the Instance Identity Document (AWS) or the internal IP associated with the supplied instance ID (VMWare). In response to this call, IDPS will provide the client with a time limited API key.
+
+
 ### Parameters
 Name | In | Type | Description
 --- | --- | --- | ---
