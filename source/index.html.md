@@ -37,7 +37,7 @@ HTTP/1.1 403 Forbidden
 HTTP/1.1 default 
 ```
 
-This call will describe the IDPS RESTful API using the OpenAPI specification. The returned schema acts as a language-agnostic interface to the API and is meant to outline the capabilities and features exposed by the API. For further information on the OpenAPI specification please visit https://github.com/OAI/OpenAPI-Specification/blob/master/README.md.
+This call will describe the IDPS RESTful API using the OpenAPI specification. The returned schema acts as a language-agnostic interface to the API and is meant to outline the capabilities and features exposed by the API. For further information on the OpenAPI specification visit https://github.com/OAI/OpenAPI-Specification/blob/master/README.md.
 
 
 ### Responses
@@ -141,7 +141,7 @@ Use this call to query the current status and configuration properties of the vi
 <span comment="workaround for markdown processing in table"></span>
 <table>
 <tr><th>Http code</th><th>Type</th><th>Description</th></tr>
-<tr><td>200</td><td>[ApplianceStatus](#appliancestatus)</td><td>Appliance status</td></tr> 
+<tr><td>200</td><td>[ApplianceStatus](#appliancestatus)</td><td>Appliance status. See https://wiki.intuit.com/display/IISKM/Monitoring+the+IDPS+Agent</td></tr> 
 <tr><td>400</td><td>no content</td><td></td></tr> 
 <tr><td>401</td><td>no content</td><td></td></tr> 
 <tr><td>403</td><td>no content</td><td></td></tr> 
